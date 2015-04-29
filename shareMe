@@ -16,6 +16,6 @@ console
 
 else
 	errorBox "Wrong arguments"
-	usage "shareDir dir"
-	example "shareDir /home/pi"
+	usage "shareMe dir"
+	example "shareMe pigetdev"
 fi
