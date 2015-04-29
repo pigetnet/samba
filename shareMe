@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -eq 1];then
+description "Downloading samba configuration $1"
+sambaconf=$1
+
+messagebox "Check Prerequisites"
+installer samba
+
+messagebox "Replacing /etc/samba/smb.conf
+autoBackup /etc/samba/smb.conf
+downloadPiGet smb $1 /etc/samba/smb.conf
+console
+cat /etc/samba/smb.conf
+console
+
+else
+	errorBox "Wrong arguments"
+	usage "shareDir dir"
+	example "shareDir /home/pi"
+fi
