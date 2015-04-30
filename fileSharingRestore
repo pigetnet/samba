@@ -1,9 +1,12 @@
 #!/bin/bash
 description "Backup file sharing configuration to /boot/bootstrap/config/smb.conf"
+
+messagebox "Check Prerequisites"
+installer samba-common
+installer smbclient
+
 cp -v /boot/bootstrap/config/smb.conf /etc/samba/smb.conf
 console
 cat /etc/samba/smb.conf
 console
 restarter samba
-
-

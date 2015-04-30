@@ -7,7 +7,7 @@ description "Downloading samba configuration $1"
 sambaconf=$1
 
 messagebox "Check Prerequisites"
-installer samba
+installer samba-common
 
 messagebox "Replacing /etc/samba/smb.conf"
 autoBackup "/etc/samba/smb.conf"
