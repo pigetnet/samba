@@ -7,11 +7,11 @@ description "Downloading samba configuration $1"
 sambaconf=$1
 
 messagebox "Check Prerequisites"
-installer samba-common
+installer samba
 
 messagebox "Replacing /etc/samba/smb.conf"
 autoBackup "/etc/samba/smb.conf"
-downloadPiget "smb" "$sambaconf" "/etc/samba/smb.conf"
+downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
 renameSamba
 
 console

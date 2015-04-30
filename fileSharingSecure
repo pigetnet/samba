@@ -2,7 +2,7 @@
 description "Securing Samba with a global password"
 
 messagebox "Check Prerequisites"
-installer samba-common
+installer samba
 installer smbclient
 
 messagebox "User List"
