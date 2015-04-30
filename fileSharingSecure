@@ -1,0 +1,23 @@
+#!/bin/bash
+description "Securing Samba with a global password"
+description "Check Prerequisites"
+installer samba-common-bin
+installer samba
+messagebox "User List"
+sambaUsers=$(listSambaUsers)
+if [ -e $sambaUsers ]
+then
+	nlbecho "no Samba users" $WARN;minibox_WARNING
+	echo "List of system users"
+	console
+	listUsers
+	console
+	. askUser "User"
+	smbpasswd -a $USERANSWER
+	echo $USERANSWER
+fi
+replaceLine "/etc/samba/smb.conf" "security" "        security = user" "\[global\]"
+console
+cat /etc/samba/smb.conf
+console
+restarter samba
