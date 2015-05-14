@@ -1,11 +1,11 @@
 #!/bin/bash
-description "Backup file sharing configuration to /boot/bootstrap/config/smb.conf"
+description "Backup file sharing configuration to /boot/piget/config/smb.conf"
 
 messagebox "Check Prerequisites"
 installer samba
 installer smbclient
 
-cp -v /boot/bootstrap/config/smb.conf /etc/samba/smb.conf
+cp -v /boot/piget/config/smb.conf /etc/samba/smb.conf
 console
 cat /etc/samba/smb.conf
 console
