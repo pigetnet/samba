@@ -12,7 +12,7 @@ installer samba
 messagebox "Replacing /etc/samba/smb.conf"
 autoBackup "/etc/samba/smb.conf"
 downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
-renameSamba
+fileSharingRename
 
 console
 cat /etc/samba/smb.conf
