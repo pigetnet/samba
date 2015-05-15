@@ -1,5 +1,5 @@
 #!/bin/bash
-description "Securing Samba with a global password"
+description "Public sharing (USE ONLY ON YOUR OWN NETWORK)"
 
 description "Check Prerequisites"
 installer samba

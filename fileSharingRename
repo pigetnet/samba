@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ -f /etc/samba/smb.conf ];then
+#Get hostname
+. ToNetbios $1
+NEW_HOSTNAME=$NewString
+description "Change /etc/samba/smb.conf to $NEW_HOSTNAME"
+#Backup smb.conf
+autoBackup /etc/samba/smb.conf
+
+replaceLine "/etc/samba/smb.conf" "netbios name =" "        netbios name = $NEW_HOSTNAME" "\[global\]"
+restarter samba
+
+console
+cat /etc/samba/smb.conf
+console
+
+else
+	nlbecho "Samba is not installed" $WARN;minibox_SKIP
+fi
+

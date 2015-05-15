@@ -23,3 +23,4 @@ else
 	usage "shareMe dir"
 	example "shareMe pigetdev"
 fi
+restarter samba
