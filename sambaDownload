@@ -12,7 +12,7 @@ installer samba
 messagebox "Replacing /etc/samba/smb.conf"
 autoBackup "/etc/samba/smb.conf"
 downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
-fileSharingRename
+sambaRename
 
 console
 cat /etc/samba/smb.conf
@@ -20,7 +20,7 @@ console
 
 else
 	errorBox "Wrong arguments"
-	usage "shareMe dir"
-	example "shareMe pigetdev"
+	usage "sambaDownload dir"
+	example "sambaDownload pigetdev"
 fi
 restarter samba

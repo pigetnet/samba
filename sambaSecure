@@ -22,4 +22,4 @@ replaceLine "/etc/samba/smb.conf" "security" "        security = user" "\[global
 console
 cat /etc/samba/smb.conf
 console
-restarter samba
+sambaRestart
