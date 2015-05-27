@@ -1,20 +1,29 @@
 #!/bin/bash
-if [ -f /etc/samba/smb.conf ];then
-#Get hostname
-. ToNetbios $1
-NEW_HOSTNAME=$NewString
-description "Change /etc/samba/smb.conf to $NEW_HOSTNAME"
-#Backup smb.conf
-autoBackup /etc/samba/smb.conf
 
-replaceLine "/etc/samba/smb.conf" "netbios name =" "        netbios name = $NEW_HOSTNAME" "\[global\]"
-restarter samba
+# If no arguments is provided we check if it was set inside bootstrap
+description "Renaming your Raspberry pi"
 
-console
-cat /etc/samba/smb.conf
-console
+if [ $# -eq 0 ]
+then
+	if [ -f /boot/piget/config/name.txt ]
+	then
+		messagebox "BOOTSTRAP CONFIGURATION FOUNDED"
+		NEW_HOSTNAME=$(cat /boot/piget/config/name.txt)
+		replaceLine "/etc/samba/smb.conf" "netbios name =" "        netbios name = $NEW_HOSTNAME" "\[global\]"
+		restarter samba
 
-else
-	nlbecho "Samba is not installed" $WARN;minibox_SKIP
+	else
+		errorBox "No enough Arguments and no configuration inside /boot/piget/config/name.txt"
+		usage "sambaRename newname"
+		example "sambaRename raspberrypi"
+		exit 1
+	fi
 fi
 
+#If an arguments is provided we will use it
+if [ $# -eq 1 ]
+then
+	NEW_HOSTNAME=$1
+	echo $NEW_HOSTNAME > /boot/piget/config/name.txt
+	PiRename
+fi

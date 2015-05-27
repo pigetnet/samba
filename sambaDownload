@@ -2,17 +2,16 @@
 
 if [ $# -eq 1 ]
 then
+	description "Downloading samba configuration $1"
+	sambaconf=$1
 
-description "Downloading samba configuration $1"
-sambaconf=$1
+	messagebox "Check Prerequisites"
+	installer samba
 
-messagebox "Check Prerequisites"
-installer samba
-
-messagebox "Replacing /etc/samba/smb.conf"
-autoBackup "/etc/samba/smb.conf"
-downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
-sambaRename
+	messagebox "Replacing /etc/samba/smb.conf"
+	autoBackup "/etc/samba/smb.conf"
+	downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
+	sambaRename
 
 console
 cat /etc/samba/smb.conf
@@ -23,4 +22,4 @@ else
 	usage "sambaDownload dir"
 	example "sambaDownload pigetdev"
 fi
-restarter samba
+
