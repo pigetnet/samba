@@ -1,0 +1,12 @@
+#!/bin/bash
+/show/description "Backup file sharing configuration to /boot/piget/config/smb.conf"
+
+/show/messagebox "Check Prerequisites"
+/system/install samba
+/system/install smbclient
+
+cp -v /boot/piget/config/smb.conf /etc/samba/smb.conf
+/show/console
+cat /etc/samba/smb.conf
+/show/console
+/system/restart samba

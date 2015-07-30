@@ -1,0 +1,4 @@
+#!/bin/bash
+/show/description "Add samba at startup"
+update-rc.d samba defaults
+/show/listecho "Samba will be launch at startup" $OK

@@ -1,0 +1,5 @@
+#!/bin/bash
+/show/messagebox "Check Prerequisites"
+/system/install smbclient
+
+pdbedit -L|cut -d: -f1

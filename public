@@ -1,0 +1,12 @@
+#!/bin/bash
+/show/description "Public sharing (USE ONLY ON YOUR OWN NETWORK)"
+
+/show/description "Check Prerequisites"
+/system/install samba
+/system/install smbclient
+
+/string/replaceLine "/etc/samba/smb.conf" "security" "        security = share" "\[global\]"
+/show/console
+cat /etc/samba/smb.conf
+/show/console
+/system/restart samba

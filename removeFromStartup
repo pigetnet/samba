@@ -1,0 +1,5 @@
+#!/bin/bash
+/show/description "Remove samba from startup"
+update-rc.d -f samba remove
+/show/listecho "Samba will not start at next boot" $ERR
+

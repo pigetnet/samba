@@ -1,0 +1,3 @@
+#!/bin/bash
+/show/description "Uninstalling Samba"
+apt-get remove samba

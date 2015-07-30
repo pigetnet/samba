@@ -1,0 +1,3 @@
+#!/bin/bash
+/show/description "Edit /etc/samba/smb.conf"
+nano /etc/samba/smb.conf

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# -eq 1 ]
+then
+	sambaconf=$1
+
+	/system/autoBackup "/etc/samba/smb.conf"
+	/system/downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
+	/do/samba/rename
+
+else
+	/show/errorBox "Wrong arguments"
+	/show/usage "sambaDownload dir"
+	/show/example "sambaDownload pigetdev"
+fi
+

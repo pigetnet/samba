@@ -2,7 +2,7 @@
 if [ $# -eq 2 ];then
 uncpath=$1
 dir=$2
-description "Mounting $uncpath at $dir"
+/show/description "Mounting $uncpath at $dir"
 mkdir $dir
 mount -t cifs $uncpath $dir -o user=guest,password=
 ls $dir

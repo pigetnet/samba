@@ -1,23 +1,23 @@
 #!/bin/bash
 # If no arguments is provided we check if it was set inside bootstrap
-description "Hiding share"
+/show/description "Hiding share"
 
 if [ -f /boot/piget/config/name.txt ]
 	then
-		messagebox "BOOTSTRAP CONFIGURATION FOUNDED"
+		/show/messagebox "BOOTSTRAP CONFIGURATION FOUNDED"
 		NEW_HOSTNAME=$(cat /boot/piget/config/name.txt)
 	else
-		errorBox "No enough Arguments and no configuration inside /boot/piget/config/name.txt"
-		usage "PiNameMe newname"
-		example "PiNameMe raspberrypi"
+		/show/errorBox "No enough Arguments and no configuration inside /boot/piget/config/name.txt"
+		/show/usage "PiNameMe newname"
+		/show/example "PiNameMe raspberrypi"
 		exit 1
 fi
 
 
 #Convert Name to Netbios convention to ensure compatibility
 #If no hostname was provided will be reset to default (raspberrypi)
-. ToNetbios "$NEW_HOSTNAME"
+. /string/ToNetbios "$NEW_HOSTNAME"
 NEW_HOSTNAME=$NewString
 
-sambaSave
-resetSamba "$NEW_HOSTNAME"
+/do/samba/save
+/net/resetSamba "$NEW_HOSTNAME"
