@@ -12,7 +12,7 @@ then
 
 	/show/messagebox "Replacing /etc/samba/smb.conf"
 	/system/autoBackup "/etc/samba/smb.conf"
-	/system/downloadFileCustom "$username" "$repo" "$sambaconf" "/etc/samba/smb.conf"
+	/system/downloadGithubFileCustom "$username" "$repo" "$sambaconf" "/etc/samba/smb.conf"
 	/do/samba/rename
 
 /show/console

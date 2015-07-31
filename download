@@ -5,7 +5,7 @@ then
 	sambaconf=$1
 
 	/system/autoBackup "/etc/samba/smb.conf"
-	/system/downloadFile "smb" "$sambaconf" "/etc/samba/smb.conf"
+	/system/downloadGithubFile "smb" "$sambaconf" "/etc/samba/smb.conf"
 	/do/samba/rename
 
 else
