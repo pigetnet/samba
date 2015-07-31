@@ -6,7 +6,7 @@
 /system/install smbclient
 
 /show/messagebox "User List"
-sambaUsers=$(/show/sambaListUsers)
+sambaUsers=$(/do/samba/listUsers)
 if [ -e $sambaUsers ]
 then
 	/show/nlbecho "no Samba users" $WARN;/show/minibox_WARNING
