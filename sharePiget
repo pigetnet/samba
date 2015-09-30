@@ -1,0 +1,3 @@
+#!/bin/bash
+cp -v /do/samba/default/piget /etc/samba/smb.conf
+/do/samba/restart

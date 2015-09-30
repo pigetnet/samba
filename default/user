@@ -1,0 +1,29 @@
+#======================= Global Settings =======================
+[global]
+        log file = /var/log/samba/log.%m
+        dns proxy = no
+	workgroup = WORKGROUP
+        os level = 20
+        syslog = 0
+        panic action = /usr/share/samba/panic-action %d
+        max log size = 1000
+
+        #Unsecure mode
+        security = share
+        browseable = yes
+        writeable = yes
+        guest ok = yes
+        
+        load printers = no
+	printing = bsd
+	printcap name = /dev/null
+	disable spoolss = yes
+
+#======================= Name =========================
+        #Name of your Raspberry Pi
+        netbios name = chapter2
+#======================= Shares =======================
+[user]
+        # Path / User
+        path = /opt/user/
+        force user = root
