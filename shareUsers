@@ -1,3 +1,4 @@
 #!/bin/bash
 cp -v /do/samba/default/user /etc/samba/smb.conf
-/do/samba/restart
+/pi/name
+/do/samba/secure

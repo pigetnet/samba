@@ -21,7 +21,7 @@
 
 #======================= Name =========================
         #Name of your Raspberry Pi
-        netbios name = chapter2
+        netbios name = TORENAME
 #======================= Shares =======================
 [user]
         # Path / User
