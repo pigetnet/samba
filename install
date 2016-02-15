@@ -1,2 +1,8 @@
 #!/bin/bash
+# Source: http://stackoverflow.com/questions/12009/piping-password-to-smbpasswd
 /system/install samba
+PASS=raspberry
+LOGIN=pi
+
+echo -ne "$PASS\n$PASS\n" | smbpasswd -a -s $LOGIN
+/do/samba/restart
