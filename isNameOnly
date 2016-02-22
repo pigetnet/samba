@@ -1,0 +1,6 @@
+checkConfig=$(cat /etc/samba/smb.conf |grep "path"|wc -l)
+if [ $checkConfig -eq 0 ];then
+	echo "1"
+else
+	echo "0"
+fi

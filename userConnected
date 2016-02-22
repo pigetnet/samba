@@ -1,0 +1,7 @@
+status=$(smbstatus|grep "Locked files:"|tail -n 1)
+
+if [[ $status == "Locked files:" ]];then
+	echo "1"
+else	
+	echo "0"
+fi

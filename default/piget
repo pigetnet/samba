@@ -9,7 +9,7 @@
         max log size = 1000
 
         #Unsecure mode
-        security = share
+        security = user
         browseable = yes
         writeable = yes
         guest ok = yes
