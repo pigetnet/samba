@@ -1,3 +1,8 @@
 #!/bin/bash
-cp -v /do/samba/default/piget /etc/samba/smb.conf
+sambaName=$(/show/smbGetName)
+/show/description "[SAMBA] share Piget Folders"
+/show/listecho "\\\\$sambaName\piget --> Modules" $OK
+/show/listecho "\\\\$sambaName\user --> User" $WARN
+/show/listecho "\\\\$sambaName\boot --> SD card" $ERR
+cp /do/samba/default/piget /etc/samba/smb.conf
 /pi/name

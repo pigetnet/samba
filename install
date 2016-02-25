@@ -1,8 +1,15 @@
 #!/bin/bash
-# Source: http://stackoverflow.com/questions/12009/piping-password-to-smbpasswd
+
+/show/description "[SAMBA] Install Windows File Sharing"
 /system/install samba
+/system/install samba-common-bin
+/system/install smbclient
+
 PASS=raspberry
 LOGIN=pi
 
-echo -ne "$PASS\n$PASS\n" | smbpasswd -a -s $LOGIN
-/do/samba/restart
+/show/listecho "[User] pi added" $OK
+/show/listecho "[Password] raspberry added" $WARN
+/show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
+
+# /do/samba/password $PASS

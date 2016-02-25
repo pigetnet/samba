@@ -1,0 +1,16 @@
+#!/bin/bash
+# If no arguments is provided we check if it was set inside bootstrap
+/show/description "[SAMBA] - Share nothing"
+
+#Check if samba is not already in name mode only so it will not overwritten backup configuration
+isNeeded=$(grep -v -F -x -f /do/samba/default/name /etc/samba/smb.conf|wc -l)
+
+if [ $isNeeded -eq 1 ] 
+	then
+			/show/listecho "Already done" $OK
+else
+	#!/bin/bash
+	sambaName=$(/show/smbGetName)
+	cp /do/samba/default/name /etc/samba/smb.conf
+	/pi/name
+fi

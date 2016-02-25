@@ -23,7 +23,7 @@
         #Name of your Raspberry Pi
         netbios name = TORENAME
 #======================= Shares =======================
-[user]
+[sd]
         # Path / User
-        path = /opt/user/
+        path = /
         force user = root

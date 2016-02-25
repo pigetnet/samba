@@ -1,0 +1,7 @@
+#!/bin/bash
+sambaName=$(/show/smbGetName)
+/show/description "[SAMBA] share everything"
+/show/listecho "[WARNING] This is highly unsecure" $ERR
+/show/listecho "\\\\$sambaName\sd --> SD card" $OK
+cp /do/samba/default/all /etc/samba/smb.conf
+/pi/name

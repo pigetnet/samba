@@ -1,12 +1,5 @@
 #!/bin/bash
-/show/description "Backup file sharing configuration to /boot/piget/config/smb.conf"
+/show/description "[SAMBA] - Reload saved configuration"
 
-/show/messagebox "Check Prerequisites"
-/system/install samba
-/system/install smbclient
-
-cp -v /boot/piget/config/smb.conf /etc/samba/smb.conf
-/show/console
-cat /etc/samba/smb.conf
-/show/console
+cp /user/config/piget/external/etc/samba/smb.conf
 /system/restart samba
