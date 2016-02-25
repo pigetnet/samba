@@ -8,8 +8,8 @@
 PASS=raspberry
 LOGIN=pi
 
-/show/listecho "[User] pi added" $OK
-/show/listecho "[Password] raspberry added" $WARN
+/show/listecho "[User] $LOGIN added" $OK
+/show/listecho "[Password] $PASS added" $WARN
 /show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
 
-# /do/samba/password $PASS
+/do/samba/password $PASS
