@@ -1,9 +1,83 @@
 #!/bin/bash
-if [ $# -eq 2 ];then
-uncpath=$1
-dir=$2
-/show/description "Mounting $uncpath at $dir"
-mkdir $dir
-mount -t cifs $uncpath $dir -o user=guest,password=
-ls $dir
+# source ip validation Mitch Frazier : http://www.linuxjournal.com/content/validating-ip-address-bash-script
+if [ $# -ge 5 ] || [ $# -le 1 ] || [ $# -eq 3 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [mount] [cifs]"
+	/show/usageDescription "Mount a samba share on your Raspberry Pi"
+	/show/usage "$0 source destination or $0 source destination username password"
+	/show/example "$0 "\\\madnerd\\piget" "" TODO $0 TODO TODO TODO TODO"
+else
+
+	function valid_ip()
+	{
+	    local  ip=$1
+	    local  stat=1
+
+	    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	        OIFS=$IFS
+	        IFS='.'
+	        ip=($ip)
+	        IFS=$OIFS
+	        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+	            && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+	        stat=$?
+	    fi
+	    return $stat
+	}
+
+	if [ $# -eq 2 ];then
+		uncpath=$1
+		dir=$2
+		user="guest"
+		password=""
+	fi
+
+	if [ $# -eq 4 ];then
+		uncpath=$1
+		dir=$2
+		user=$3
+		password=$4
+	fi
+	
+	uncpath="\\$uncpath"
+	host=$(echo $uncpath|grep -o -P '(?<=\\\\).*(?=\\)')
+
+
+	#If uncpath have local don't modify it
+	if [[ $host == *".local"* ]];then
+		echo "OK local"
+	else
+		#If uncpath have an IP address skip adding .local
+		if ! valid_ip $host; then
+			uncpath=$(echo $uncpath|sed "s/$host/$host.local/")
+		fi
+		#Else add local (since our raspberry pi probably don't understand netbios name)
+	fi
+
+	/show/description "[SAMBA] Mount $uncpath on $dir"
+	/system/makedir $dir
+	mount -t cifs $uncpath $dir -o user=$user,password=$password > /tmp/mountsmb.log 2>&1
+	error=$?
+	result=$(cat /tmp/mountsmb.log|head -n 1|grep -o '[0-9]*')
+
+	
+	if [[ $error -eq 0 ]];then
+		ls $dir
+	else
+		#Device or resource busy (already mount)
+		if [[ $result -eq "16" ]];then
+			/show/listecho "Already mount, remount" $WARN
+			umount $dir
+			mount -t cifs $uncpath $dir -o user=$user,password=$password
+			if [ $? -eq 0 ];then
+				ls $dir
+			else
+				/show/listecho "Remount failed" $ERR
+			fi
+		fi
+		#Permission denied
+		if [[ $result -eq "13" ]];then
+			/show/listecho "Invalid username or password" $ERR
+		fi
+	fi
 fi

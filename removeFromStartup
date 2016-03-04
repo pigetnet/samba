@@ -2,10 +2,10 @@
 if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/messagebox "$0"
 	/show/info "[beta] [service] [systemctl]"
-	/show/usageDescription "Samba will be start on boot"
+	/show/usageDescription "Samba will not start at boot"
 	/show/usage "$0"
 else	
-	/show/description "Add samba at startup"
+	/show/description "Disable samba at startup"
 	systemctl disable samba
 	/show/listecho "Samba will be launch at startup" $OK
 fi

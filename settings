@@ -1,4 +1,17 @@
 #!/bin/bash
-/show/description "Edit /etc/samba/smb.conf"
-nano /etc/samba/smb.conf
-/do/samba/restart
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [interactive]"
+	/show/usageDescription "Modify /etc/samba/smb.conf with nano editor"
+	/show/usage "$0"
+else
+	/show/description "Edit /etc/samba/smb.conf"
+	md5smb_before=$(md5sum /etc/samba/smb.conf)
+	nano /etc/samba/smb.conf
+	md5smb_after=$(md5sum /etc/samba/smb.conf)
+
+	if [[ $md5smb_after != $md5smb_before ]];then
+		/show/listecho "Reload configuration" $OK
+		/do/samba/restart
+	fi
+fi

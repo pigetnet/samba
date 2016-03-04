@@ -4,8 +4,7 @@ if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/info "[beta] [samba] [backup]"
 	/show/usageDescription "Save current configuration to /boot and /user"
 	/show/usage "$0"
-	/show/example "$0"
 else
-  /show/description "[Samba] - Save current configuration"
-  /pi/syncFile /etc/samba/smb.conf
+ 	/show/description "[SAMBA] - Save current configuration"
+ 	/pi/syncFile /etc/samba/smb.conf
 fi

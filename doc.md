@@ -53,18 +53,30 @@
 | Description           | Display samba users             |
 | Usage                 | /do/samba/listUsers             |
 
-| /do/samba/load                          |                        |
-|:----------------------------------------|:-----------------------|
-| Info                                    | [alpha] [undocumented] |
-| System                                  | /system/restart samba, |
-| 1. [SAMBA] - Reload saved configuration |                        |
+| /do/samba/load                                      |                                                   |
+|:----------------------------------------------------|:--------------------------------------------------|
+| Info                                                | [beta] [samba] [sync]                             |
+| Description                                         | Copy smb.conf from /user to current configuration |
+| Usage                                               | /do/samba/load                                    |
+| Example                                             | /do/samba/load                                    |
+| System                                              | /system/restart samba,                            |
+| 1. [SAMBA] - Reload saved configuration             |                                                   |
+| 1. You must first backup your current configuration |                                                   |
+| 2. Type : /do/samba/save                            |                                                   |
 
-| /do/samba/mount              |                        |
-|:-----------------------------|:-----------------------|
-| Info                         | [alpha] [undocumented] |
-| Arguments                    | 1:uncpath, 2:dir,      |
-| Variables                    | uncpath=$1, dir=$2,    |
-| 1. Mounting $uncpath at $dir |                        |
+| /do/samba/mount                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|:----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Info                              | [beta] [mount] [cifs]                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Description                       | Mount a samba share on your Raspberry Pi                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Usage                             | /do/samba/mount source destination or /do/samba/mount source destination username password                                                                                                                                                                                                                                                                                                                                                       |
+| Example                           | /do/samba/mount \\\madnerd\\piget  TODO /do/samba/mount TODO TODO TODO TODO                                                                                                                                                                                                                                                                                                                                                                      |
+| Arguments                         | 1:local  ip, 1:uncpath, 2:dir, 1:uncpath, 2:dir, 3:user, 4:password,                                                                                                                                                                                                                                                                                                                                                                             |
+| Variables                         | local  ip=$1, OIFS=$IFS, IFS=$OIFS, stat=$?, uncpath=$1, dir=$2, uncpath=$1, dir=$2, user=$3, password=$4, host=$(echo $uncpath|grep -o -P '(?<=\\\\).*(?=\\)'), uncpath=$(echo $uncpath|sed "s/$host/$host.local/"), mount -t cifs $uncpath $dir -o user=$user,password=$password > /tmp/mountsmb.log 2>&1, error=$?, result=$(cat /tmp/mountsmb.log|head -n 1|grep -o '[0-9]*'), mount -t cifs $uncpath $dir -o user=$user,password=$password, |
+| System                            | /system/makedir $dir,                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 1. [SAMBA] Mount $uncpath on $dir |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 1. Already mount, remount         |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 2. Remount failed                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 3. Invalid username or password   |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 | /do/samba/password                     |                                                                           |
 |:---------------------------------------|:--------------------------------------------------------------------------|
@@ -80,66 +92,38 @@
 | 2. no Samba users                      |                                                                           |
 | 3. Password changed                    |                                                                           |
 
-| /do/samba/public                                 |                                                                          |
-|:-------------------------------------------------|:-------------------------------------------------------------------------|
-| Info                                             | [alpha] [undocumented]                                                   |
-| Softwares                                        | samba, smbclient,                                                        |
-| System                                           | /system/install samba, /system/install smbclient, /system/restart samba, |
-| 1. Public sharing (USE ONLY ON YOUR OWN NETWORK) |                                                                          |
-| 2. Check Prerequisites                           |                                                                          |
-
-| /do/samba/readme.md   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|:----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Info                  | [alpha] [undocumented]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Modules               | | /do/samba/addToStartup   |                              |, | /do/samba/copy   |                                             |, | Example          | /do/samba/copy /user/config/samba.conf      |, | /do/samba/download   |                                    |, | /do/samba/install   |                                                                         |, | /do/samba/isNameOnly   |                                 |, | /do/samba/listUsers   |                                 |, | /do/samba/load   |                        |, | /do/samba/mount   |                        |, | /do/samba/password   |                                                                     |, | Example              | /do/samba/password badPassword or /do/samba/password pi badPassword |, | /do/samba/public   |                        |, | /do/samba/remove   |                        |, | /do/samba/removeFromStartup   |                              |, | /do/samba/rename   |                         |, | /do/samba/restart   |                        |, | /do/samba/save   |                                               |, | Example          | /do/samba/save                                |, | /do/samba/secure   |                        |, | /do/samba/settings   |                        |, | /do/samba/setupPassword   |                                                                           |, | Example                   | /do/samba/setupPassword raspberry or /do/samba/setupPassword pi raspberry |, | /do/samba/shareAll   |                        |, | /do/samba/shareNothing   |                        |, | /do/samba/sharePiget   |                        |, | /do/samba/shareUser   |                        |, | /do/samba/shareWeb   |                        |, | /do/samba/start   |                             |, | /do/samba/status   |                               |, | /do/samba/stop   |                             |, | /do/samba/userConnected   |                                               |, |
-
-| /do/samba/remove      |                        |
-|:----------------------|:-----------------------|
-| Info                  | [alpha] [undocumented] |
-| 1. Uninstalling Samba |                        |
-
+  
 | /do/samba/removeFromStartup        |                              |
 |:-----------------------------------|:-----------------------------|
 | Info                               | [beta] [service] [systemctl] |
-| Description                        | Samba will be start on boot  |
+| Description                        | Samba will not start at boot |
 | Usage                              | /do/samba/removeFromStartup  |
-| 1. Add samba at startup            |                              |
+| 1. Disable samba at startup        |                              |
 | 1. Samba will be launch at startup |                              |
 
-| /do/samba/rename                  |                                                                   |
-|:----------------------------------|:------------------------------------------------------------------|
-| Info                              | [alpha] [undocumented]                                            |
-| Usage                             | sambaRename newname                                               |
-| Example                           | sambaRename raspberrypi                                           |
-| Arguments                         | 1:NEW_HOSTNAME,                                                   |
-| Variables                         | NEW_HOSTNAME=$(cat /boot/piget/config/name.txt), NEW_HOSTNAME=$1, |
-| System                            | /system/restart samba,                                            |
-| 1. Samba : $NEW_HOSTNAME          |                                                                   |
-| 1. Name ==> /boot/config/name.txt |                                                                   |
-
-| /do/samba/restart   |                        |
-|:--------------------|:-----------------------|
-| Info                | [alpha] [undocumented] |
-| System              | /system/restart samba, |
+| /do/samba/restart   |                             |
+|:--------------------|:----------------------------|
+| Info                | [release] [samba] [service] |
+| Description         | Restart samba services      |
+| Usage               | /do/samba/restart           |
+| System              | /system/restart samba,      |
 
 | /do/samba/save                          |                                               |
 |:----------------------------------------|:----------------------------------------------|
 | Info                                    | [beta] [samba] [backup]                       |
 | Description                             | Save current configuration to /boot and /user |
 | Usage                                   | /do/samba/save                                |
-| Example                                 | /do/samba/save                                |
-| 1. [Samba] - Save current configuration |                                               |
+| 1. [SAMBA] - Save current configuration |                                               |
 
-| /do/samba/secure   |                        |
-|:-------------------|:-----------------------|
-| Info               | [alpha] [undocumented] |
-| Modules            | /do/samba/restart,     |
-
-| /do/samba/settings          |                        |
-|:----------------------------|:-----------------------|
-| Info                        | [alpha] [undocumented] |
-| Modules                     | /do/samba/restart,     |
-| 1. Edit /etc/samba/smb.conf |                        |
+| /do/samba/settings          |                                                                                          |
+|:----------------------------|:-----------------------------------------------------------------------------------------|
+| Info                        | [beta] [samba] [interactive]                                                             |
+| Description                 | Modify /etc/samba/smb.conf with nano editor                                              |
+| Usage                       | /do/samba/settings                                                                       |
+| Variables                   | md5smb_before=$(md5sum /etc/samba/smb.conf), md5smb_after=$(md5sum /etc/samba/smb.conf), |
+| Modules                     | /do/samba/restart,                                                                       |
+| 1. Edit /etc/samba/smb.conf |                                                                                          |
+| 1. Reload configuration     |                                                                                          |
 
 | /do/samba/setupPassword                |                                                                               |
 |:---------------------------------------|:------------------------------------------------------------------------------|
@@ -155,18 +139,24 @@
 | 2. no Samba users                      |                                                                               |
 | 3. Password changed                    |                                                                               |
 
-| /do/samba/shareAll                   |                                            |
-|:-------------------------------------|:-------------------------------------------|
-| Info                                 | [alpha] [undocumented]                     |
-| Variables                            | sambaName=$(/show/smbGetName),             |
-| Modules                              | cp /do/samba/conf/all /etc/samba/smb.conf, |
-| 1. [SAMBA] share everything          |                                            |
-| 1. [WARNING] This is highly unsecure |                                            |
-| 2. \\\\$sambaName\sd --> SD card     |                                            |
+| /do/samba/shareAll                   |                                               |
+|:-------------------------------------|:----------------------------------------------|
+| Info                                 | [beta] [samba] [danger] [share]               |
+| Description                          | Share the entire SDcard (use it with caution) |
+| Usage                                | /do/samba/shareAll                            |
+| Example                              | /do/samba/shareAll                            |
+| Variables                            | sambaName=$(/show/smbGetName),                |
+| Modules                              | cp /do/samba/conf/all /etc/samba/smb.conf,    |
+| 1. [SAMBA] share everything          |                                               |
+| 1. [WARNING] This is highly unsecure |                                               |
+| 2. \\\\$sambaName\sd --> SD card     |                                               |
 
 | /do/samba/shareNothing     |                                                                                                                         |
 |:---------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| Info                       | [alpha] [undocumented]                                                                                                  |
+| Info                       | [beta] [samba] [share]                                                                                                  |
+| Description                | Share nothing but keep netbios name (will do nothing if this is already the case)                                       |
+| Usage                      | /do/samba/shareNothing                                                                                                  |
+| Example                    | /do/samba/shareNothing                                                                                                  |
 | Variables                  | isNeeded=$(grep -v -F -x -f /do/samba/conf/name /etc/samba/smb.conf|wc -l), sambaName=$(/show/smbGetName),              |
 | Modules                    | isNeeded=$(grep -v -F -x -f /do/samba/conf/name /etc/samba/smb.conf|wc -l), cp /do/samba/conf/name /etc/samba/smb.conf, |
 | 1. [SAMBA] - Share nothing |                                                                                                                         |
@@ -174,7 +164,10 @@
 
 | /do/samba/sharePiget                |                                              |
 |:------------------------------------|:---------------------------------------------|
-| Info                                | [alpha] [undocumented]                       |
+| Info                                | [beta] [samba] [share]                       |
+| Description                         | Share /opt/piget /opt/user and /boot/piget   |
+| Usage                               | /do/samba/sharePiget                         |
+| Example                             | /do/samba/sharePiget                         |
 | Variables                           | sambaName=$(/show/smbGetName),               |
 | Modules                             | cp /do/samba/conf/piget /etc/samba/smb.conf, |
 | 1. [SAMBA] share Piget Folders      |                                              |
@@ -182,21 +175,27 @@
 | 2. \\\\$sambaName\user --> User     |                                              |
 | 3. \\\\$sambaName\boot --> SD card  |                                              |
 
-| /do/samba/shareUser   |                                                                  |
-|:----------------------|:-----------------------------------------------------------------|
-| Info                  | [alpha] [undocumented]                                           |
-| Modules               | cp -v /do/samba/conf/user /etc/samba/smb.conf, /do/samba/secure, |
+| /do/samba/shareUser   |                                                |
+|:----------------------|:-----------------------------------------------|
+| Info                  | [beta] [samba] [share]                         |
+| Description           | Share /opt/user (user folder)                  |
+| Usage                 | /do/samba/shareUser                            |
+| Example               | /do/samba/shareUser                            |
+| Modules               | cp -v /do/samba/conf/user /etc/samba/smb.conf, |
 
 | /do/samba/shareWeb   |                                               |
 |:---------------------|:----------------------------------------------|
-| Info                 | [alpha] [undocumented]                        |
+| Info                 | [beta] [samba] [share]                        |
+| Description          | Share /var/www (using www-data as user)       |
+| Usage                | /do/samba/shareWeb                            |
+| Example              | /do/samba/shareWeb                            |
 | Modules              | cp -v /do/samba/conf/web /etc/samba/smb.conf, |
 
-| /do/samba/start   |                             |
-|:------------------|:----------------------------|
-| Info              | [release] [samba] [service] |
-| Description       | Start samba services        |
-| Usage             | /do/samba/start             |
+| /do/samba/start   |                            |
+|:------------------|:---------------------------|
+| Info              | [release] [samba] [init.d] |
+| Description       | Start samba services       |
+| Usage             | /do/samba/start            |
 
 | /do/samba/status   |                               |
 |:-------------------|:------------------------------|
@@ -204,11 +203,25 @@
 | Description        | Display status of samba share |
 | Usage              | /do/samba/status              |
 
-| /do/samba/stop   |                             |
-|:-----------------|:----------------------------|
-| Info             | [release] [samba] [service] |
-| Description      | Stop samba services         |
-| Usage            | /do/samba/stop              |
+| /do/samba/stop   |                            |
+|:-----------------|:---------------------------|
+| Info             | [release] [samba] [init.d] |
+| Description      | Stop samba services        |
+| Usage            | /do/samba/stop             |
+
+| /do/samba/unmount       |                             |
+|:------------------------|:----------------------------|
+| Info                    | [beta] [umount]             |
+| Description             | Unmount a samba share       |
+| Usage                   | /do/samba/unmount directory |
+| Example                 | /do/samba/unmount directory |
+| Arguments               | 1:dir,                      |
+| Variables               | dir=$1, errorLevel=$?,      |
+| 1. [SAMBA] unmount $dir |                             |
+| 1. Successfuly unmount  |                             |
+| 2. Unmount failed       |                             |
+| 3. $dir is not mounted  |                             |
+| 4. $dir doesnt exists   |                             |
 
 | /do/samba/userConnected   |                                                     |
 |:--------------------------|:----------------------------------------------------|

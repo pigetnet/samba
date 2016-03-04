@@ -1,3 +1,11 @@
 #!/bin/bash
-cp -v /do/samba/conf/web /etc/samba/smb.conf
-/pi/name
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [share]"
+	/show/usageDescription "Share /var/www (using www-data as user)"
+	/show/usage "$0"
+	/show/example "$0"
+else
+	cp -v /do/samba/conf/web /etc/samba/smb.conf
+	/pi/name
+fi

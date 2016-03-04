@@ -1,3 +1,0 @@
-#!/bin/bash
-/string/replaceLine "/etc/samba/smb.conf" "security" "        security = user" "\[global\]"
-/do/samba/restart

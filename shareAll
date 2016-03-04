@@ -1,7 +1,15 @@
 #!/bin/bash
-sambaName=$(/show/smbGetName)
-/show/description "[SAMBA] share everything"
-/show/listecho "[WARNING] This is highly unsecure" $ERR
-/show/listecho "\\\\$sambaName\sd --> SD card" $OK
-cp /do/samba/conf/all /etc/samba/smb.conf
-/pi/name
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [danger] [share]"
+	/show/usageDescription "Share the entire SDcard (use it with caution)"
+	/show/usage "$0"
+	/show/example "$0"
+else
+	sambaName=$(/show/smbGetName)
+	/show/description "[SAMBA] share everything"
+	/show/listecho "[WARNING] This is highly unsecure" $ERR
+	/show/listecho "\\\\$sambaName\sd --> SD card" $OK
+	cp /do/samba/conf/all /etc/samba/smb.conf
+	/pi/name
+fi

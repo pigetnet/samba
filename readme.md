@@ -31,14 +31,18 @@
 | Description           | Display samba users             |
 | Info                  | [beta] [samba] [list] [pdbedit] |
 
-| /do/samba/load   |                        |
-|:-----------------|:-----------------------|
-| Info             | [alpha] [undocumented] |
+| /do/samba/load   |                                                   |
+|:-----------------|:--------------------------------------------------|
+| Description      | Copy smb.conf from /user to current configuration |
+| Example          | /do/samba/load                                    |
+| Info             | [beta] [samba] [sync]                             |
 
-| /do/samba/mount   |                        |
-|:------------------|:-----------------------|
-| Info              | [alpha] [undocumented] |
-| Arguments         | 1:uncpath, 2:dir,      |
+| /do/samba/mount   |                                                                             |
+|:------------------|:----------------------------------------------------------------------------|
+| Description       | Mount a samba share on your Raspberry Pi                                    |
+| Example           | /do/samba/mount \\\madnerd\\piget  TODO /do/samba/mount TODO TODO TODO TODO |
+| Info              | [beta] [mount] [cifs]                                                       |
+| Arguments         | 1:local  ip, 1:uncpath, 2:dir, 1:uncpath, 2:dir, 3:user, 4:password,        |
 
 | /do/samba/password   |                                                                     |
 |:---------------------|:--------------------------------------------------------------------|
@@ -47,42 +51,25 @@
 | Info                 | [beta] [smbpasswd]                                                  |
 | Arguments            | 1:username, 2:password, 1:password,                                 |
 
-| /do/samba/public   |                        |
-|:-------------------|:-----------------------|
-| Info               | [alpha] [undocumented] |
-
-| /do/samba/remove   |                        |
-|:-------------------|:-----------------------|
-| Info               | [alpha] [undocumented] |
-
 | /do/samba/removeFromStartup   |                              |
 |:------------------------------|:-----------------------------|
-| Description                   | Samba will be start on boot  |
+| Description                   | Samba will not start at boot |
 | Info                          | [beta] [service] [systemctl] |
 
-| /do/samba/rename   |                         |
-|:-------------------|:------------------------|
-| Example            | sambaRename raspberrypi |
-| Info               | [alpha] [undocumented]  |
-| Arguments          | 1:NEW_HOSTNAME,         |
-
-| /do/samba/restart   |                        |
-|:--------------------|:-----------------------|
-| Info                | [alpha] [undocumented] |
+| /do/samba/restart   |                             |
+|:--------------------|:----------------------------|
+| Description         | Restart samba services      |
+| Info                | [release] [samba] [service] |
 
 | /do/samba/save   |                                               |
 |:-----------------|:----------------------------------------------|
 | Description      | Save current configuration to /boot and /user |
-| Example          | /do/samba/save                                |
 | Info             | [beta] [samba] [backup]                       |
 
-| /do/samba/secure   |                        |
-|:-------------------|:-----------------------|
-| Info               | [alpha] [undocumented] |
-
-| /do/samba/settings   |                        |
-|:---------------------|:-----------------------|
-| Info                 | [alpha] [undocumented] |
+| /do/samba/settings   |                                             |
+|:---------------------|:--------------------------------------------|
+| Description          | Modify /etc/samba/smb.conf with nano editor |
+| Info                 | [beta] [samba] [interactive]                |
 
 | /do/samba/setupPassword   |                                                                           |
 |:--------------------------|:--------------------------------------------------------------------------|
@@ -91,40 +78,57 @@
 | Info                      | [beta] [smbpasswd] [interactive]                                          |
 | Arguments                 | 1:username,                                                               |
 
-| /do/samba/shareAll   |                        |
-|:---------------------|:-----------------------|
-| Info                 | [alpha] [undocumented] |
+| /do/samba/shareAll   |                                               |
+|:---------------------|:----------------------------------------------|
+| Description          | Share the entire SDcard (use it with caution) |
+| Example              | /do/samba/shareAll                            |
+| Info                 | [beta] [samba] [danger] [share]               |
 
-| /do/samba/shareNothing   |                        |
-|:-------------------------|:-----------------------|
-| Info                     | [alpha] [undocumented] |
+| /do/samba/shareNothing   |                                                                                   |
+|:-------------------------|:----------------------------------------------------------------------------------|
+| Description              | Share nothing but keep netbios name (will do nothing if this is already the case) |
+| Example                  | /do/samba/shareNothing                                                            |
+| Info                     | [beta] [samba] [share]                                                            |
 
-| /do/samba/sharePiget   |                        |
-|:-----------------------|:-----------------------|
-| Info                   | [alpha] [undocumented] |
+| /do/samba/sharePiget   |                                            |
+|:-----------------------|:-------------------------------------------|
+| Description            | Share /opt/piget /opt/user and /boot/piget |
+| Example                | /do/samba/sharePiget                       |
+| Info                   | [beta] [samba] [share]                     |
 
-| /do/samba/shareUser   |                        |
-|:----------------------|:-----------------------|
-| Info                  | [alpha] [undocumented] |
+| /do/samba/shareUser   |                               |
+|:----------------------|:------------------------------|
+| Description           | Share /opt/user (user folder) |
+| Example               | /do/samba/shareUser           |
+| Info                  | [beta] [samba] [share]        |
 
-| /do/samba/shareWeb   |                        |
-|:---------------------|:-----------------------|
-| Info                 | [alpha] [undocumented] |
+| /do/samba/shareWeb   |                                         |
+|:---------------------|:----------------------------------------|
+| Description          | Share /var/www (using www-data as user) |
+| Example              | /do/samba/shareWeb                      |
+| Info                 | [beta] [samba] [share]                  |
 
-| /do/samba/start   |                             |
-|:------------------|:----------------------------|
-| Description       | Start samba services        |
-| Info              | [release] [samba] [service] |
+| /do/samba/start   |                            |
+|:------------------|:---------------------------|
+| Description       | Start samba services       |
+| Info              | [release] [samba] [init.d] |
 
 | /do/samba/status   |                               |
 |:-------------------|:------------------------------|
 | Description        | Display status of samba share |
 | Info               | [release] [samba] [smbstatus] |
 
-| /do/samba/stop   |                             |
-|:-----------------|:----------------------------|
-| Description      | Stop samba services         |
-| Info             | [release] [samba] [service] |
+| /do/samba/stop   |                            |
+|:-----------------|:---------------------------|
+| Description      | Stop samba services        |
+| Info             | [release] [samba] [init.d] |
+
+| /do/samba/unmount   |                             |
+|:--------------------|:----------------------------|
+| Description         | Unmount a samba share       |
+| Example             | /do/samba/unmount directory |
+| Info                | [beta] [umount]             |
+| Arguments           | 1:dir,                      |
 
 | /do/samba/userConnected   |                                               |
 |:--------------------------|:----------------------------------------------|

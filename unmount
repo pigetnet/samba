@@ -1,0 +1,33 @@
+#!/bin/bash
+if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [umount]"
+	/show/usageDescription "Unmount a samba share"
+	/show/usage "$0 directory"
+	/show/example "$0 directory"
+else
+	dir=$1
+	/show/description "[SAMBA] unmount $dir"
+
+	if [ -e $dir ];then
+		if [ `stat -fc%t:%T "$dir"` != `stat -fc%t:%T "$dir/.."` ]; then
+		    ismounted=1
+		else
+	 	 	ismounted=0
+		fi
+
+		if [ $ismounted -eq 1 ];then
+			umount $dir > /tmp/unmountsmb.log 2>&1
+			errorLevel=$?
+			if [ $errorLevel -eq 0 ];then
+				/show/listecho "Successfuly unmount" $OK
+				else
+					/show/listecho "Unmount failed" $ERR
+			fi
+		else
+			/show/listecho "$dir is not mounted" $WARN
+		fi
+	else
+		/show/listecho "$dir doesn't exists" $ERR
+	fi
+fi

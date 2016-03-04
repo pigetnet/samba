@@ -1,5 +1,18 @@
 #!/bin/bash
-/show/description "[SAMBA] - Reload saved configuration"
-
-cp /user/config/piget/external/etc/samba/smb.conf
-/system/restart samba
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [sync]"
+	/show/usageDescription "Copy smb.conf from /user to current configuration"
+	/show/usage "$0"
+	/show/example "$0"
+else
+	/show/description "[SAMBA] - Reload saved configuration"
+	userFile="/user/config/piget/external/etc/samba/smb.conf"
+	if [ -e $userFile ];then
+		cp $userFile /etc/samba/smb.conf
+		/system/restart samba
+	else
+		/show/listecho "You must first backup your current configuration" $OK
+		/show/listecho "Type : /do/samba/save" $WARN
+	fi
+fi

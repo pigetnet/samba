@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/messagebox "$0"
-	/show/info "[release] [samba] [service]"
+	/show/info "[release] [samba] [init.d]"
 	/show/usageDescription "Start samba services"
 	/show/usage "$0"
 else

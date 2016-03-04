@@ -1,8 +1,16 @@
 #!/bin/bash
-sambaName=$(/show/smbGetName)
-/show/description "[SAMBA] share Piget Folders"
-/show/listecho "\\\\$sambaName\piget --> Modules" $OK
-/show/listecho "\\\\$sambaName\user --> User" $WARN
-/show/listecho "\\\\$sambaName\boot --> SD card" $ERR
-cp /do/samba/conf/piget /etc/samba/smb.conf
-/pi/name
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [share]"
+	/show/usageDescription "Share /opt/piget /opt/user and /boot/piget"
+	/show/usage "$0"
+	/show/example "$0"
+else
+	sambaName=$(/show/smbGetName)
+	/show/description "[SAMBA] share Piget Folders"
+	/show/listecho "\\\\$sambaName\piget --> Modules" $OK
+	/show/listecho "\\\\$sambaName\user --> User" $WARN
+	/show/listecho "\\\\$sambaName\boot --> SD card" $ERR
+	cp /do/samba/conf/piget /etc/samba/smb.conf
+	/pi/name
+fi

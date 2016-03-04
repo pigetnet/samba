@@ -1,4 +1,11 @@
 #!/bin/bash
-cp -v /do/samba/conf/user /etc/samba/smb.conf
-/pi/name
-/do/samba/secure
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [share]"
+	/show/usageDescription "Share /opt/user (user folder)"
+	/show/usage "$0"
+	/show/example "$0"
+else
+	cp -v /do/samba/conf/user /etc/samba/smb.conf
+	/pi/name
+fi
