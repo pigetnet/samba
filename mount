@@ -5,7 +5,7 @@ if [ $# -ge 5 ] || [ $# -le 1 ] || [ $# -eq 3 ] || [[ $1 == "--help" ]] || [ $(i
 	/show/info "[beta] [mount] [cifs]"
 	/show/usageDescription "Mount a samba share on your Raspberry Pi"
 	/show/usage "$0 source destination or $0 source destination username password"
-	/show/example "$0 "\\\madnerd\\piget" "" TODO $0 TODO TODO TODO TODO"
+	/show/example "$0 \\\\madnerd\\piget /media/madnerd/piget or $0 \\\\madnerd\\piget /media/madnerd/piget pi raspberry"
 else
 
 	function valid_ip()
