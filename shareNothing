@@ -3,7 +3,7 @@
 /show/description "[SAMBA] - Share nothing"
 
 #Check if samba is not already in name mode only so it will not overwritten backup configuration
-isNeeded=$(grep -v -F -x -f /do/samba/default/name /etc/samba/smb.conf|wc -l)
+isNeeded=$(grep -v -F -x -f /do/samba/conf/name /etc/samba/smb.conf|wc -l)
 
 if [ $isNeeded -eq 1 ] 
 	then
@@ -11,6 +11,6 @@ if [ $isNeeded -eq 1 ]
 else
 	#!/bin/bash
 	sambaName=$(/show/smbGetName)
-	cp /do/samba/default/name /etc/samba/smb.conf
+	cp /do/samba/conf/name /etc/samba/smb.conf
 	/pi/name
 fi

@@ -1,16 +1,15 @@
 #!/bin/bash
-
-if [ $# -eq 1 ]
-then
-	sambaconf=$1
-
-	/system/autoBackup "/etc/samba/smb.conf"
-	/system/downloadGithubFile "smb" "$sambaconf" "/etc/samba/smb.conf"
-	/do/samba/rename
-
-else
-	/show/errorBox "Wrong arguments"
-	/show/usage "sambaDownload dir"
-	/show/example "sambaDownload pigetdev"
+if [ $# -ne 2 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [wget] [github] [backup]"
+	/show/usageDescription "Download a configuration on github"
+	/show/usage "$0 pigetnet/smb mpd"
+else	
+	repo=$1
+	sambaconf=$2
+	/show/description "[SAMBA] Download $repo/$sambaconf"
+	/system/downloadGithubFile "$repo" "$sambaconf" "/etc/samba/smb.conf"
+	if [ $? -eq 0 ];then
+		/pi/name
+	fi
 fi
-

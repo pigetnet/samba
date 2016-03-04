@@ -1,4 +1,4 @@
 #!/bin/bash
-cp -v /do/samba/default/user /etc/samba/smb.conf
+cp -v /do/samba/conf/user /etc/samba/smb.conf
 /pi/name
 /do/samba/secure

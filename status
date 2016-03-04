@@ -1,1 +1,8 @@
-smbstatus
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[release] [samba] [smbstatus]"
+	/show/usageDescription "Display status of samba share"
+	/show/usage "$0"
+else
+	smbstatus
+fi

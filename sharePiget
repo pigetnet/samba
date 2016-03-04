@@ -4,5 +4,5 @@ sambaName=$(/show/smbGetName)
 /show/listecho "\\\\$sambaName\piget --> Modules" $OK
 /show/listecho "\\\\$sambaName\user --> User" $WARN
 /show/listecho "\\\\$sambaName\boot --> SD card" $ERR
-cp /do/samba/default/piget /etc/samba/smb.conf
+cp /do/samba/conf/piget /etc/samba/smb.conf
 /pi/name

@@ -1,3 +1,3 @@
 #!/bin/bash
-cp -v /do/samba/default/web /etc/samba/smb.conf
+cp -v /do/samba/conf/web /etc/samba/smb.conf
 /pi/name

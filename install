@@ -1,14 +1,20 @@
 #!/bin/bash
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [install]"
+	/show/usageDescription "Install samba and samba tools and set a default password (pi:raspberry)"
+	/show/usage "$0"
+else
+	/show/description "[SAMBA] Install Windows File Sharing"
+	/system/install samba
+	/system/install samba-common-bin
+	/system/install smbclient
 
-/show/description "[SAMBA] Install Windows File Sharing"
-/system/install samba
-/system/install samba-common-bin
-/system/install smbclient
+	PASS=raspberry
+	LOGIN=pi
 
-PASS=raspberry
-LOGIN=pi
-
-/do/samba/password $LOGIN $PASS
-/show/listecho "[User] $LOGIN added" $OK
-/show/listecho "[Password] $PASS added" $WARN
-/show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
+	/do/samba/password $LOGIN $PASS
+	/show/listecho "[User] $LOGIN added" $OK
+	/show/listecho "[Password] $PASS added" $WARN
+	/show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
+fi

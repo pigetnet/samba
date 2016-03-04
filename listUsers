@@ -1,5 +1,9 @@
 #!/bin/bash
-/show/messagebox "Check Prerequisites"
-/system/install smbclient
-
-pdbedit -L|cut -d: -f1
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [samba] [list] [pdbedit]"
+	/show/usageDescription "Display samba users"
+	/show/usage "$0"
+else
+	pdbedit -L|cut -d: -f1
+fi
