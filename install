@@ -10,11 +10,14 @@ else
 	/system/install samba-common-bin
 	/system/install smbclient
 
-	PASS=raspberry
-	LOGIN=pi
-
-	/do/samba/password $LOGIN $PASS
-	/show/listecho "[User] $LOGIN added" $OK
-	/show/listecho "[Password] $PASS added" $WARN
-	/show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
+        /system/makedir /user/config/samba
+        if [ ! -f /user/config/samba/installed.txt ];then
+                PASS=raspberry
+                LOGIN=pi
+                /do/samba/password $LOGIN $PASS
+                /show/listecho "[User] $LOGIN added" $OK
+                /show/listecho "[Password] $PASS added" $WARN
+                /show/listecho "Change password with /do/samba/setupPassword or /do/samba/password" $ERR
+                touch /user/config/samba/installed.txt
+        fi
 fi
