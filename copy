@@ -7,11 +7,12 @@ if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/example "$0 /user/config/samba.conf"
 else
 	settings=$1
+	name=$(/show/name)
 		if [ -e $settings ];then
 			/show/description "[SAMBA] $settings -> /etc/samba/smb.conf"
 			/pi/syncFile /etc/samba/smb.conf
 			cp -v $settings /etc/samba/smb.conf
-			/pi/name
+			/pi/name $name
 		else
 			/show/listecho "$settings doesn't exists" $ERR
 		fi
