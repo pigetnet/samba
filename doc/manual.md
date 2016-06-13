@@ -37,12 +37,12 @@
 | Example          | /do/samba/load                                    |
 | Info             | [beta] [samba] [sync]                             |
 
-| /do/samba/mount   |                                                                             |
-|:------------------|:----------------------------------------------------------------------------|
-| Description       | Mount a samba share on your Raspberry Pi                                    |
-| Example           | /do/samba/mount \\\madnerd\\piget  TODO /do/samba/mount TODO TODO TODO TODO |
-| Info              | [beta] [mount] [cifs]                                                       |
-| Arguments         | 1:local  ip, 1:uncpath, 2:dir, 1:uncpath, 2:dir, 3:user, 4:password,        |
+| /do/samba/mount   |                                                                                                                                 |
+|:------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| Description       | Mount a samba share on your Raspberry Pi                                                                                        |
+| Example           | /do/samba/mount \\\\madnerd\\piget /media/madnerd/piget or /do/samba/mount \\\\madnerd\\piget /media/madnerd/piget pi raspberry |
+| Info              | [beta] [mount] [cifs]                                                                                                           |
+| Arguments         | 1:local  ip, 1:uncpath, 2:dir, 1:uncpath, 2:dir, 3:user, 4:password,                                                            |
 
 | /do/samba/password   |                                                                     |
 |:---------------------|:--------------------------------------------------------------------|

@@ -13,7 +13,7 @@
 | Usage                                       | /do/samba/copy file                         |
 | Example                                     | /do/samba/copy /user/config/samba.conf      |
 | Arguments                                   | 1:settings,                                 |
-| Variables                                   | settings=$1,                                |
+| Variables                                   | settings=$1, name=$(/show/name),            |
 | 1. [SAMBA] $settings -> /etc/samba/smb.conf |                                             |
 | 1. $settings doesnt exists                  |                                             |
 
@@ -27,18 +27,18 @@
 | System                               | /system/downloadGithubFile "$repo" "$sambaconf" "/etc/samba/smb.conf", |
 | 1. [SAMBA] Download $repo/$sambaconf |                                                                        |
 
-| /do/samba/install                                                     |                                                                                     |
-|:----------------------------------------------------------------------|:------------------------------------------------------------------------------------|
-| Info                                                                  | [beta] [samba] [install]                                                            |
-| Description                                                           | Install samba and samba tools and set a default password (pi:raspberry)             |
-| Usage                                                                 | /do/samba/install                                                                   |
-| Softwares                                                             | samba, samba-common-bin, smbclient,                                                 |
-| Modules                                                               | /do/samba/password $LOGIN $PASS,                                                    |
-| System                                                                | /system/install samba, /system/install samba-common-bin, /system/install smbclient, |
-| 1. [SAMBA] Install Windows File Sharing                               |                                                                                     |
-| 4. [User] $LOGIN added                                                |                                                                                     |
-| 5. [Password] $PASS added                                             |                                                                                     |
-| 6. Change password with /do/samba/setupPassword or /do/samba/password |                                                                                     |
+| /do/samba/install                                                     |                                                                                                                         |
+|:----------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
+| Info                                                                  | [beta] [samba] [install]                                                                                                |
+| Description                                                           | Install samba and samba tools and set a default password (pi:raspberry)                                                 |
+| Usage                                                                 | /do/samba/install                                                                                                       |
+| Softwares                                                             | samba, samba-common-bin, smbclient,                                                                                     |
+| Modules                                                               | /do/samba/password $LOGIN $PASS,                                                                                        |
+| System                                                                | /system/install samba, /system/install samba-common-bin, /system/install smbclient, /system/makedir /user/config/samba, |
+| 1. [SAMBA] Install Windows File Sharing                               |                                                                                                                         |
+| 4. [User] $LOGIN added                                                |                                                                                                                         |
+| 5. [Password] $PASS added                                             |                                                                                                                         |
+| 6. Change password with /do/samba/setupPassword or /do/samba/password |                                                                                                                         |
 
 | /do/samba/isNameOnly   |                                                            |
 |:-----------------------|:-----------------------------------------------------------|
@@ -69,7 +69,7 @@
 | Info                              | [beta] [mount] [cifs]                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Description                       | Mount a samba share on your Raspberry Pi                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Usage                             | /do/samba/mount source destination or /do/samba/mount source destination username password                                                                                                                                                                                                                                                                                                                                                       |
-| Example                           | /do/samba/mount \\\madnerd\\piget  TODO /do/samba/mount TODO TODO TODO TODO                                                                                                                                                                                                                                                                                                                                                                      |
+| Example                           | /do/samba/mount \\\\madnerd\\piget /media/madnerd/piget or /do/samba/mount \\\\madnerd\\piget /media/madnerd/piget pi raspberry                                                                                                                                                                                                                                                                                                                  |
 | Arguments                         | 1:local  ip, 1:uncpath, 2:dir, 1:uncpath, 2:dir, 3:user, 4:password,                                                                                                                                                                                                                                                                                                                                                                             |
 | Variables                         | local  ip=$1, OIFS=$IFS, IFS=$OIFS, stat=$?, uncpath=$1, dir=$2, uncpath=$1, dir=$2, user=$3, password=$4, host=$(echo $uncpath|grep -o -P '(?<=\\\\).*(?=\\)'), uncpath=$(echo $uncpath|sed "s/$host/$host.local/"), mount -t cifs $uncpath $dir -o user=$user,password=$password > /tmp/mountsmb.log 2>&1, error=$?, result=$(cat /tmp/mountsmb.log|head -n 1|grep -o '[0-9]*'), mount -t cifs $uncpath $dir -o user=$user,password=$password, |
 | System                            | /system/makedir $dir,                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -86,13 +86,12 @@
 | Example                                | /do/samba/password badPassword or /do/samba/password pi badPassword       |
 | Arguments                              | 1:username, 2:password, 1:password,                                       |
 | Variables                              | username=$1, password=$2, password=$1, sambaUsers=$(/do/samba/listUsers), |
-| Modules                                | sambaUsers=$(/do/samba/listUsers), /do/samba/secure,                      |
+| Modules                                | sambaUsers=$(/do/samba/listUsers),                                        |
 | 1. [SAMBA] $username : PASSWORD        |                                                                           |
 | 1. The user must exists on the system! |                                                                           |
 | 2. no Samba users                      |                                                                           |
 | 3. Password changed                    |                                                                           |
 
-  
 | /do/samba/removeFromStartup        |                              |
 |:-----------------------------------|:-----------------------------|
 | Info                               | [beta] [service] [systemctl] |
@@ -133,7 +132,7 @@
 | Example                                | /do/samba/setupPassword raspberry or /do/samba/setupPassword pi raspberry     |
 | Arguments                              | 1:username,                                                                   |
 | Variables                              | username=$1, sambaUsers=$(/do/samba/listUsers),                               |
-| Modules                                | sambaUsers=$(/do/samba/listUsers), /do/samba/secure,                          |
+| Modules                                | sambaUsers=$(/do/samba/listUsers), /do/samba/restart,                         |
 | 1. [SAMBA] $username : PASSWORD        |                                                                               |
 | 1. The user must exists on the system! |                                                                               |
 | 2. no Samba users                      |                                                                               |
