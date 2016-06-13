@@ -1,4 +1,4 @@
-# piget-led
+# piget-samba
 Use Windows file sharing to modify scripts and configuration files
 
 ![Logo](https://raw.githubusercontent.com/pigetnet/samba/master/doc/piget-samba.png)
