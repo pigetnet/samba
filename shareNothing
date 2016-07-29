@@ -18,6 +18,6 @@ else
 		#!/bin/bash
 		sambaName=$(/show/smbGetName)
 		cp /do/samba/conf/name /etc/samba/smb.conf
-		/pi/name
+		/pi/name $sambaName
 	fi
 fi
