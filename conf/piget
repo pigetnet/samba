@@ -8,7 +8,6 @@
         panic action = /usr/share/samba/panic-action %d
         max log size = 1000
 
-        #Unsecure mode
         security = user
         browseable = yes
         writeable = yes
@@ -30,8 +29,4 @@
 
 [piget]
         path = /opt/piget
-        force user = root
-
-[boot]
-        path = /boot/piget/
         force user = root

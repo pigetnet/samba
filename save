@@ -2,9 +2,9 @@
 if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/messagebox "$0"
 	/show/info "[beta] [samba] [backup]"
-	/show/usageDescription "Save current configuration to /boot and /user"
+	/show/usageDescription "Save current configuration to /user/settings"
 	/show/usage "$0"
 else
  	/show/description "[SAMBA] - Save current configuration"
- 	/pi/syncFile /etc/samba/smb.conf
+ 	cp /etc/samba/smb.conf /user/settings/samba/smb.conf
 fi
