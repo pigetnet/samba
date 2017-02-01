@@ -22,7 +22,7 @@
         #Name of your Raspberry Pi
         netbios name = TORENAME
 #======================= Shares =======================
-[user]
+[web]
         # Path / User
         path = /var/www
         force user = www-data

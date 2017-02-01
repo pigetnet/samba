@@ -27,6 +27,6 @@
         path = /opt/user/
         force user = root
 
-[piget]
+[modules]
         path = /opt/piget
         force user = root
