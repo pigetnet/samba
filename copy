@@ -4,13 +4,12 @@ if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/info "[beta] [samba] [backup]"
 	/show/usageDescription "Copy a configuration to /etc/samba/smb.conf"
 	/show/usage "$0 file"
-	/show/example "$0 /user/config/samba.conf"
+	/show/example "$0 /user/settings/samba/smb.conf"
 else
 	settings=$1
 	name=$(/show/name)
 		if [ -e $settings ];then
 			/show/description "[SAMBA] $settings -> /etc/samba/smb.conf"
-			/pi/syncFile /etc/samba/smb.conf
 			cp -v $settings /etc/samba/smb.conf
 			/pi/name $name
 		else

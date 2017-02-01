@@ -8,7 +8,6 @@
         panic action = /usr/share/samba/panic-action %d
         max log size = 1000
 
-        #Unsecure mode
         security = user
         browseable = yes
         writeable = yes
@@ -23,7 +22,7 @@
         #Name of your Raspberry Pi
         netbios name = TORENAME
 #======================= Shares =======================
-[user]
+[web]
         # Path / User
         path = /var/www
         force user = www-data
