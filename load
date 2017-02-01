@@ -7,7 +7,7 @@ if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
 	/show/example "$0"
 else
 	/show/description "[SAMBA] - Reload saved configuration"
-	userFile="/user/config/piget/external/etc/samba/smb.conf"
+	userFile="/user/settings/samba/smb.conf"
 	if [ -e $userFile ];then
 		cp $userFile /etc/samba/smb.conf
 		/system/restart samba
